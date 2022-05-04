@@ -1,0 +1,100 @@
+﻿| Method |     Mean |    Error |   StdDev |
+|------- |---------:|---------:|---------:|
+| Update | 39.35 ms | 0.335 ms | 0.297 ms |
+
+With MemoryDiagnoser
+| Method |     Mean |    Error |   StdDev |   Gen 0 |   Gen 1 |   Gen 2 | Allocated |
+|------- |---------:|---------:|---------:|--------:|--------:|--------:|----------:|
+| Update | 40.95 ms | 0.111 ms | 0.103 ms | 76.9231 | 76.9231 | 76.9231 |    593 KB |
+
+Afer library completion
+| Method |     Mean |    Error |   StdDev |   Gen 0 |   Gen 1 |   Gen 2 | Allocated |
+|------- |---------:|---------:|---------:|--------:|--------:|--------:|----------:|
+| Update | 39.30 ms | 0.324 ms | 0.303 ms | 76.9231 | 76.9231 | 76.9231 |    593 KB |
+
+Conversion to factory
+| Method |     Mean |    Error |   StdDev |   Gen 0 |   Gen 1 |   Gen 2 | Allocated |
+|------- |---------:|---------:|---------:|--------:|--------:|--------:|----------:|
+| Create | 42.40 ms | 0.102 ms | 0.079 ms | 83.3333 | 83.3333 | 83.3333 |    687 KB |
+
+Removing unncessary initialization
+| Method |     Mean |    Error |   StdDev |   Gen 0 |   Gen 1 |   Gen 2 | Allocated |
+|------- |---------:|---------:|---------:|--------:|--------:|--------:|----------:|
+| Update | 42.63 ms | 0.487 ms | 0.432 ms | 83.3333 | 83.3333 | 83.3333 |    687 KB |
+
+Hull stack fixed
+| Method |     Mean |    Error |   StdDev |   Gen 0 |   Gen 1 |   Gen 2 | Allocated |
+|------- |---------:|---------:|---------:|--------:|--------:|--------:|----------:|
+| Create | 40.80 ms | 0.096 ms | 0.085 ms | 76.9231 | 76.9231 | 76.9231 |    689 KB |
+
+Removing on array params
+| Method |     Mean |    Error |   StdDev |   Gen 0 |   Gen 1 |   Gen 2 | Allocated |
+|------- |---------:|---------:|---------:|--------:|--------:|--------:|----------:|
+| Create | 41.23 ms | 0.276 ms | 0.258 ms | 76.9231 | 76.9231 | 76.9231 |    690 KB |
+
+Baselining Voronoi factory
+|           Method |        Mean |     Error |   StdDev |   Gen 0 |   Gen 1 |   Gen 2 | Allocated |
+|----------------- |------------:|----------:|---------:|--------:|--------:|--------:|----------:|
+| CreateDelaunator |    40.95 ms |  0.289 ms | 0.271 ms | 76.9231 | 76.9231 | 76.9231 |    689 KB |
+|    CreateVoronoi | 1,459.06 ms | 10.232 ms | 9.571 ms |       - |       - |       - |  5,247 KB |
+
+Circumcenters to in dictionary in VoronoiFactory
+|           Method |        Mean |     Error |    StdDev |   Gen 0 |   Gen 1 |   Gen 2 | Allocated |
+|----------------- |------------:|----------:|----------:|--------:|--------:|--------:|----------:|
+| CreateDelaunator |    40.97 ms |  0.237 ms |  0.210 ms | 83.3333 | 83.3333 | 83.3333 |    689 KB |
+|    CreateVoronoi | 1,479.52 ms | 13.171 ms | 12.320 ms |       - |       - |       - |  5,248 KB |
+
+VoronoiFactory calculations to static methods
+|           Method |        Mean |     Error |    StdDev |   Gen 0 |   Gen 1 |   Gen 2 | Allocated |
+|----------------- |------------:|----------:|----------:|--------:|--------:|--------:|----------:|
+| CreateDelaunator |    40.91 ms |  0.123 ms |  0.102 ms | 76.9231 | 76.9231 | 76.9231 |    689 KB |
+|    CreateVoronoi | 1,500.33 ms | 10.929 ms | 10.223 ms |       - |       - |       - |  4,808 KB |
+
+VoronoiFactory circumcenters to list
+|           Method |        Mean |    Error |   StdDev |   Gen 0 |   Gen 1 |   Gen 2 | Allocated |
+|----------------- |------------:|---------:|---------:|--------:|--------:|--------:|----------:|
+| CreateDelaunator |    41.21 ms | 0.308 ms | 0.288 ms | 76.9231 | 76.9231 | 76.9231 |    689 KB |
+|    CreateVoronoi | 1,435.22 ms | 5.429 ms | 4.534 ms |       - |       - |       - |  4,493 KB |
+
+Voronoi factory circumcenters to array
+|           Method |        Mean |     Error |    StdDev |   Gen 0 |   Gen 1 |   Gen 2 | Allocated |
+|----------------- |------------:|----------:|----------:|--------:|--------:|--------:|----------:|
+| CreateDelaunator |    40.86 ms |  0.074 ms |  0.062 ms | 83.3333 | 83.3333 | 83.3333 |    690 KB |
+|    CreateVoronoi | 1,429.98 ms | 13.412 ms | 12.546 ms |       - |       - |       - |  4,429 KB |
+
+Voronoi factory cells to array
+|           Method |        Mean |    Error |   StdDev |   Gen 0 |   Gen 1 |   Gen 2 | Allocated |
+|----------------- |------------:|---------:|---------:|--------:|--------:|--------:|----------:|
+| CreateDelaunator |    40.98 ms | 0.163 ms | 0.144 ms | 83.3333 | 83.3333 | 83.3333 |    690 KB |
+|    CreateVoronoi | 1,424.59 ms | 9.401 ms | 7.850 ms |       - |       - |       - |  4,394 KB |
+
+Voronoi factory points to array
+|           Method |        Mean |    Error |   StdDev |   Gen 0 |   Gen 1 |   Gen 2 | Allocated |
+|----------------- |------------:|---------:|---------:|--------:|--------:|--------:|----------:|
+| CreateDelaunator |    40.97 ms | 0.211 ms | 0.197 ms | 76.9231 | 76.9231 | 76.9231 |    689 KB |
+|    CreateVoronoi | 1,413.59 ms | 2.603 ms | 2.435 ms |       - |       - |       - |  4,362 KB |
+
+Voronoi factory neighbour map to array
+|           Method |        Mean |     Error |   StdDev |   Gen 0 |   Gen 1 |   Gen 2 | Allocated |
+|----------------- |------------:|----------:|---------:|--------:|--------:|--------:|----------:|
+| CreateDelaunator |    41.00 ms |  0.107 ms | 0.100 ms | 76.9231 | 76.9231 | 76.9231 |    689 KB |
+|    CreateVoronoi | 1,425.83 ms | 11.153 ms | 9.887 ms |       - |       - |       - |  4,181 KB |
+
+Voronoi factory Switching to Edge.Coincident method
+|           Method |      Mean |     Error |    StdDev |   Gen 0 |   Gen 1 |   Gen 2 | Allocated |
+|----------------- |----------:|----------:|----------:|--------:|--------:|--------:|----------:|
+| CreateDelaunator |  44.98 ms |  0.896 ms |  1.768 ms | 90.9091 | 90.9091 | 90.9091 |    690 KB |
+|    CreateVoronoi | 787.86 ms | 15.594 ms | 16.685 ms |       - |       - |       - |  4,194 KB |
+
+Voronoi factory add all and then discard duplicate edges
+|           Method |      Mean |     Error |    StdDev |    Gen 0 |    Gen 1 |    Gen 2 | Allocated |
+|----------------- |----------:|----------:|----------:|---------:|---------:|---------:|----------:|
+| CreateDelaunator | 43.473 ms | 0.8535 ms | 1.0794 ms |  83.3333 |  83.3333 |  83.3333 |    689 KB |
+|    CreateVoronoi |  5.573 ms | 0.1083 ms | 0.1112 ms | 484.3750 | 335.9375 | 148.4375 |  2,928 KB |
+
+Add DelaunayFactory benchmark
+|           Method |      Mean |     Error |    StdDev |    Median |    Gen 0 |    Gen 1 |    Gen 2 | Allocated |
+|----------------- |----------:|----------:|----------:|----------:|---------:|---------:|---------:|----------:|
+| CreateDelaunator | 43.289 ms | 0.7960 ms | 1.8764 ms | 42.466 ms |  83.3333 |  83.3333 |  83.3333 |    840 KB |
+|    CreateVoronoi |  5.015 ms | 0.0418 ms | 0.0349 ms |  5.016 ms | 484.3750 | 335.9375 | 148.4375 |  2,928 KB |
+|   CreateDelaunay |  1.419 ms | 0.0060 ms | 0.0053 ms |  1.419 ms | 207.0313 |  82.0313 |  41.0156 |  1,228 KB |
