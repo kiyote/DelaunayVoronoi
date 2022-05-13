@@ -119,27 +119,32 @@ internal sealed class DelaunayFactoryTests {
 	}
 
 	[Test]
+	public void Create_ReferencePoints_CorrectNeighbours() {
+		Assert.AreEqual( 4, _delaunay.Neighbours.Count );
+
+		Assert.AreEqual( 2, _delaunay.Neighbours[_delaunay.Triangles[0]].Count );
+		Assert.AreSame( _delaunay.Triangles[1], _delaunay.Neighbours[_delaunay.Triangles[0]][0] );
+		Assert.AreSame( _delaunay.Triangles[3], _delaunay.Neighbours[_delaunay.Triangles[0]][1] );
+
+		Assert.AreEqual( 2, _delaunay.Neighbours[_delaunay.Triangles[1]].Count );
+		Assert.AreSame( _delaunay.Triangles[0], _delaunay.Neighbours[_delaunay.Triangles[1]][0] );
+		Assert.AreSame( _delaunay.Triangles[2], _delaunay.Neighbours[_delaunay.Triangles[1]][1] );
+
+		Assert.AreEqual( 2, _delaunay.Neighbours[_delaunay.Triangles[2]].Count );
+		Assert.AreSame( _delaunay.Triangles[1], _delaunay.Neighbours[_delaunay.Triangles[2]][0] );
+		Assert.AreSame( _delaunay.Triangles[3], _delaunay.Neighbours[_delaunay.Triangles[2]][1] );
+
+		Assert.AreEqual( 2, _delaunay.Neighbours[_delaunay.Triangles[3]].Count );
+		Assert.AreSame( _delaunay.Triangles[0], _delaunay.Neighbours[_delaunay.Triangles[3]][0] );
+		Assert.AreSame( _delaunay.Triangles[2], _delaunay.Neighbours[_delaunay.Triangles[3]][1] );
+	}
+
+	[Test]
 	[Ignore("Used to visualize output for inspection.")]
 	public void Visualize() {
 		string folder = Path.Combine( Path.GetTempPath(), "delaunayvoronoi" );
 		Directory.CreateDirectory( folder );
 
-		/*
-		List<Point> points = new List<Point>();
-		while( points.Count < 4000 ) {
-			Point newPoint = new Point(
-				_random.Next( 1000 ),
-				_random.Next( 1000 )
-			);
-			if( !points.Any( p =>
-						Math.Abs( p.X - newPoint.X ) <= 1
-						&& Math.Abs( p.Y - newPoint.Y ) <= 1
-					)
-			) {
-				points.Add( newPoint );
-			}
-		}
-		*/
 		List<Point> points = new List<Point>() {
 			new Point( 250, 250 ),
 			new Point( 750, 250 ),

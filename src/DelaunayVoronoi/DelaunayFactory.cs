@@ -5,15 +5,15 @@ internal sealed class DelaunayFactory : IDelaunayFactory {
 	Delaunay IDelaunayFactory.Create(
 		Delaunator delaunator
 	) {
-		List<Point> points;
+		Point[] points = new Point[delaunator.Coords.Count / 2];
 		List<Edge> edges;
 		List<Triangle> triangles;
 
-		points = new List<Point>();
 		int n = delaunator.Coords.Count / 2;
 		for( int i = 0; i < n; i++ ) {
-			points.Add(
-				new Point( (int)delaunator.Coords[i * 2], (int)delaunator.Coords[( i * 2 ) + 1] )
+			points[i] = new Point(
+				(int)delaunator.Coords[i * 2],
+				(int)delaunator.Coords[( i * 2 ) + 1]
 			);
 		}
 
@@ -40,6 +40,32 @@ internal sealed class DelaunayFactory : IDelaunayFactory {
 			}
 		}
 
-		return new Delaunay( points, edges, triangles );
+		IDictionary<Triangle, IReadOnlyList<Triangle>> neighbours = MakeNeighbours( delaunator, triangles );
+		
+		return new Delaunay( points, edges, triangles, neighbours );
+	}
+
+	private static IDictionary<Triangle, IReadOnlyList<Triangle>> MakeNeighbours(
+		Delaunator delaunator,
+		List<Triangle> triangles
+	) {
+		List<Triangle>[] neighbours = new List<Triangle>[triangles.Count];
+		for (int i = 0; i < triangles.Count; i++) {
+			neighbours[i] = new List<Triangle>();
+		}
+		for (int i = 0; i < delaunator.HalfEdges.Count;i++ ) {
+			int e = delaunator.HalfEdges[i];
+			if (e != -1) {
+				int t = e / 3;
+				Triangle adj = triangles[delaunator.HalfEdges[e] / 3];
+				neighbours[t].Add( adj );
+			}
+		}
+
+		Dictionary<Triangle, IReadOnlyList<Triangle>> result = new Dictionary<Triangle, IReadOnlyList<Triangle>>();
+		for (int i = 0; i < triangles.Count; i++) {
+			result[triangles[i]] = neighbours[i];
+		}
+		return result;
 	}
 }

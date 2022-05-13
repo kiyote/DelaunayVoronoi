@@ -3,5 +3,6 @@
 public sealed record Delaunay(
 	IReadOnlyList<Point> Points,
 	IReadOnlyList<Edge> Edges,
-	IReadOnlyList<Triangle> Triangles
+	IReadOnlyList<Triangle> Triangles,
+	IDictionary<Triangle, IReadOnlyList<Triangle>> Neighbours
 );

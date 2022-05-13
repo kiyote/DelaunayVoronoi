@@ -62,8 +62,27 @@ internal sealed class VoronoiFactoryTests {
 		Assert.AreEqual( p4, c.Points[3] );
 	}
 
+	[TestCaseSource( nameof( NeighboursTestCaseSource ) )]
+	public void Neighbours(
+		int cellIndex,
+		int expectedNeighbourCount
+	) {
+		Cell cell = _voronoi.Cells[cellIndex];
+		IReadOnlyList<Cell> neighbours = _voronoi.Neighbours[cell];
+
+		Assert.AreEqual( expectedNeighbourCount, neighbours.Count );
+	}
+
+	private static IEnumerable<object> NeighboursTestCaseSource() {
+		yield return new object[] { 0, 3 };
+		yield return new object[] { 1, 3 };
+		yield return new object[] { 2, 4 };
+		yield return new object[] { 3, 3 };
+		yield return new object[] { 4, 3 };
+	}
+
 	[Test]
-	[Ignore("Used to create visual output for inspection.")]
+	[Ignore( "Used to create visual output for inspection." )]
 	public void Visualize() {
 		string folder = Path.Combine( Path.GetTempPath(), "delaunayvoronoi" );
 		int width = 1000;
@@ -119,11 +138,11 @@ internal sealed class VoronoiFactoryTests {
 
 		image.Mutate( i => i.Fill( Color.Black ) );
 		foreach( Cell c in voronoi.Cells.Where( c => !c.IsOpen ) ) {
-			for (int i = 0; i < c.Points.Count-1; i++) {
+			for( int i = 0; i < c.Points.Count - 1; i++ ) {
 				plots[0].X = c.Points[i].X;
 				plots[0].Y = c.Points[i].Y;
-				plots[1].X = c.Points[i+1].X;
-				plots[1].Y = c.Points[i+1].Y;
+				plots[1].X = c.Points[i + 1].X;
+				plots[1].Y = c.Points[i + 1].Y;
 				image.Mutate( i => i.DrawLines( Color.Blue, 1.0f, plots ) );
 			}
 			plots[0].X = c.Points[^1].X;
