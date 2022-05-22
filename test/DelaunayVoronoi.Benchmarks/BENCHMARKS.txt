@@ -98,3 +98,10 @@ Add DelaunayFactory benchmark
 | CreateDelaunator | 43.289 ms | 0.7960 ms | 1.8764 ms | 42.466 ms |  83.3333 |  83.3333 |  83.3333 |    840 KB |
 |    CreateVoronoi |  5.015 ms | 0.0418 ms | 0.0349 ms |  5.016 ms | 484.3750 | 335.9375 | 148.4375 |  2,928 KB |
 |   CreateDelaunay |  1.419 ms | 0.0060 ms | 0.0053 ms |  1.419 ms | 207.0313 |  82.0313 |  41.0156 |  1,228 KB |
+
+Fixing delaunator factory to reference List<T> vs IEnumerable<T>
+|           Method |     Mean |     Error |    StdDev |    Gen 0 |    Gen 1 |    Gen 2 | Allocated |
+|----------------- |---------:|----------:|----------:|---------:|---------:|---------:|----------:|
+| CreateDelaunator | 1.549 ms | 0.0060 ms | 0.0053 ms | 121.0938 | 121.0938 | 121.0938 |    715 KB |
+|    CreateVoronoi | 5.028 ms | 0.0349 ms | 0.0309 ms | 484.3750 | 335.9375 | 148.4375 |  2,927 KB |
+|   CreateDelaunay | 3.485 ms | 0.0159 ms | 0.0141 ms | 398.4375 | 273.4375 | 121.0938 |  2,383 KB |
